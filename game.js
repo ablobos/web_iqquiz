@@ -29,11 +29,11 @@ let questions = [
     },
     {
         question: 'The White House is located in ____________',
-        choice1: 'Seattle, Washington',
-        choice2: 'Austin, Texas',
-        choice3: 'Washington D.C.',
-        choice4: 'Buffalo, NY',
-        answer: Washington DC,
+        choice1: 'Washington',
+        choice2: 'Texas',
+        choice3: 'District of Columbia',
+        choice4: 'New York',
+        answer: District of Columbia,
     },
 
     {
@@ -42,6 +42,66 @@ let questions = [
         choice2: 'Amazon',
         choice3: 'Apple',
         choice4: 'Marvel Comics',
-        answer: 6,
+        answer: Apple,
     }
 ]
+
+const SCORE_POINTS = 100
+const MAX_QUESTION = 4
+
+startGame = () => {
+    questionCounter = 0
+    score = 0
+    availableQuestions = [...questions]
+    getNewQuestion()
+}
+
+getNewQuestion = () => {
+    if(availableQuestions.length === 0 || questionsCounter > MAX_QUESTIONS) {
+        localStorage.setItem('mostRecentScore', score)
+
+        return window.location.assign('/end.html')
+    }
+
+    questionCounter++
+    progressText.innerText = 'Question ${questionCounter} of ${MAX_QUESTIONS}'
+    progressBarFull.style.width = '${(questionCounter/MAX_QUESTIONS) * 100}%'
+
+    const questionsIndex = Math.floor(Math.random() * availableQuestions.length)
+    currentQuestion = availableQuestions[questionsIndex]
+    question.innerText = currentQuestion.question
+
+    choices.forEach(choice => {
+        const number = choice.dataset['number']
+        choice.innerText = currentQuestion ['choice' + number]
+    })
+
+    availableQuestions.spilce(questionsIndex, 1)
+
+    acceptingAnswers = true
+}
+
+choices.forEach(choices => {
+    choice.addEventListener('click', e => {
+        if(!accpetingAnswers) return
+
+        acceptingAnswers = false
+        const selectedChoice = e.target
+        const selectedAnswe = slecetedChoice.dataset['number']
+
+        let classToApply = selectedAnswer ==  currentQuestion.answer ? 'correct' : 'incorrect'
+
+        if(classToApply === 'correct') {
+            incrementScore(SCORE_POINTS)
+        }
+
+        selectedChoice.parentElement.classList.add(classToApply)
+
+        setTimeout {() => {
+            selectedChoice.parentElement.classList.remove(classToApply)
+            getNewQuestion()
+
+        }, 1000
+        }}
+    })
+})
