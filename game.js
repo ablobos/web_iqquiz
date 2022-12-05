@@ -1,16 +1,16 @@
-const question = document.querySelector('#question')
-const choices = Array.from(document.querySelectorAll('.choice-text'))
-const progressText = document.querySelector('#progressText')
-const scoreText = document.querySelector('#score')
-const progressBarFull = document.querySelector('#progressBarFull')
+const questions = document.querySelector('#questions');
+const choices = Array.from(document.querySelectorAll('.choice-text'));
+const progressText = document.querySelector('#progressText');
+const scoreText = document.querySelector('#score');
+const progressBarFull = document.querySelector('#progressBarFull');
 
 let currentQuestion = {}
 let acceptingAnswers = true
 let score = 0
 let questionCounter = 0
-let availableQuestion = []
+let availableQuestions = []
 
-let questions = [
+let question = [
     {
         question: 'If you have 6 fish and half of them die from drowining, how many do you have left?',
         choice1: '6',
@@ -31,9 +31,9 @@ let questions = [
         question: 'The White House is located in ____________',
         choice1: 'Washington',
         choice2: 'Texas',
-        choice3: 'District of Columbia',
+        choice3: 'DC',
         choice4: 'New York',
-        answer: District of Columbia,
+        answer: DC,
     },
 
     {
@@ -57,7 +57,7 @@ startGame = () => {
 }
 
 getNewQuestion = () => {
-    if(availableQuestions.length === 0 || questionsCounter > MAX_QUESTIONS) {
+    if(availableQuestions.length === 0 || questionCounter > MAX_QUESTIONS) {
         localStorage.setItem('mostRecentScore', score)
 
         return window.location.assign('/end.html')
@@ -73,21 +73,21 @@ getNewQuestion = () => {
 
     choices.forEach(choice => {
         const number = choice.dataset['number']
-        choice.innerText = currentQuestion ['choice' + number]
+        choice.innerText = currentQuestion['choice' + number]
     })
 
-    availableQuestions.spilce(questionsIndex, 1)
+    availableQuestions.splice(questionsIndex, 1)
 
     acceptingAnswers = true
 }
 
-choices.forEach(choices => {
+choices.forEach(choice => {
     choice.addEventListener('click', e => {
-        if(!accpetingAnswers) return
+        if(!acceptingAnswers) return
 
         acceptingAnswers = false
         const selectedChoice = e.target
-        const selectedAnswe = slecetedChoice.dataset['number']
+        const selectedAnswer = selectedChoice.dataset['number']
 
         let classToApply = selectedAnswer ==  currentQuestion.answer ? 'correct' : 'incorrect'
 
@@ -97,11 +97,17 @@ choices.forEach(choices => {
 
         selectedChoice.parentElement.classList.add(classToApply)
 
-        setTimeout {() => {
+        setTimeout(() => {
             selectedChoice.parentElement.classList.remove(classToApply)
             getNewQuestion()
 
-        }, 1000
-        }}
+        }, 1000)
     })
 })
+
+incrementScore = num => {
+    score +=num
+    scoreText.innerText = score
+}
+
+startGame()
