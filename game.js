@@ -1,4 +1,4 @@
-const questions = document.querySelector('#questions');
+const question = document.querySelector('#questions');
 const choices = Array.from(document.querySelectorAll('.choice-text'));
 const progressText = document.querySelector('#progressText');
 const scoreText = document.querySelector('#score');
@@ -10,14 +10,14 @@ let score = 0
 let questionCounter = 0
 let availableQuestions = []
 
-let question = [
+let questions = [
     {
         question: 'If you have 6 fish and half of them die from drowining, how many do you have left?',
         choice1: '6',
         choice2: '2',
         choice3: '4',
         choice4: '3',
-        answer: 6,
+        answer: 1,
     },
     {
         question: "Clive's dad had five sons, he named them Jason, Jerry, Johnny, Jonah and ________",
@@ -25,7 +25,7 @@ let question = [
         choice2: 'Freddy',
         choice3: 'John',
         choice4: 'Clive',
-        answer: Clive,
+        answer: 4,
     },
     {
         question: 'The White House is located in ____________',
@@ -33,7 +33,7 @@ let question = [
         choice2: 'Texas',
         choice3: 'DC',
         choice4: 'New York',
-        answer: DC,
+        answer: 3,
     },
 
     {
@@ -42,12 +42,12 @@ let question = [
         choice2: 'Amazon',
         choice3: 'Apple',
         choice4: 'Marvel Comics',
-        answer: Apple,
+        answer: 3,
     }
 ]
 
 const SCORE_POINTS = 100
-const MAX_QUESTION = 4
+const MAX_QUESTIONS = 4
 
 startGame = () => {
     questionCounter = 0
@@ -64,8 +64,8 @@ getNewQuestion = () => {
     }
 
     questionCounter++
-    progressText.innerText = 'Question ${questionCounter} of ${MAX_QUESTIONS}'
-    progressBarFull.style.width = '${(questionCounter/MAX_QUESTIONS) * 100}%'
+    progressText.innerText = `Question ${questionCounter} of ${MAX_QUESTIONS}`
+    progressBarFull.style.width = `${(questionCounter/MAX_QUESTIONS) * 100}%`
 
     const questionsIndex = Math.floor(Math.random() * availableQuestions.length)
     currentQuestion = availableQuestions[questionsIndex]
