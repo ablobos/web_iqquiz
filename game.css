@@ -48,7 +48,9 @@ body {
 .hud-media-text {
     text-align: center;
 }
-
+.question {
+    display: flex;
+}
 #progressBar {
     width: 20rem;
     height: 3rem;
@@ -56,6 +58,12 @@ body {
     margin-top: 2rem;
     border-radius: 50px;
     overflow: hidden;
+}
+
+#progressBarFull {
+    height: 100%;
+    background: #d1a68d;
+    width: 0%;
 }
 
 @media screen and (max-width: 768px) {
