@@ -17,6 +17,8 @@ My goal was to sharpen up my vanilla javascript skills and use a tutorial on top
 ## The Creation
 Link: https://ablobos.github.io/web_iqquiz/
 ## The Sneak Peek
+"C:\Users\nxtlo\bootcamp\web_iqquiz\images\Home Pge.jpg"
+![Questions](https://user-images.githubusercontent.com/117130907/205792001-dedddc24-4abf-4163-ae8a-3f7b98495c63.jpg)
 
 
 ## Sources
