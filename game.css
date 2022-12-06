@@ -28,10 +28,10 @@ body {
     width: 100%;
 }
 .correct {
-    background: linear-gradient(32deg, green 100%); 
+    background: green; 
 }
 .incorrect {
-    background: linear-gradient(32deg, red 100%); 
+    background: red;
 }
 
 /*heads up Display */
